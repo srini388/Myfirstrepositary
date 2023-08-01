@@ -1,8 +1,7 @@
 package com.example.jupiterwaves.demoCars.Controller;
 
-
-import com.example.jupiterwaves.demoCars.model.Servicecenter;
-import com.example.jupiterwaves.demoCars.service.ServiceCenterServiceI;
+import com.example.jupiterwaves.demoCars.model.CarService;
+import com.example.jupiterwaves.demoCars.service.CarServiceServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,22 +11,24 @@ import java.util.List;
 @RequestMapping("/api/v1")
 
 public class CarServiceController {
+
     @Autowired
-    private ServiceCenterServiceI serviceCenterService;
+    private CarServiceServiceI CarServiceService;
 
-    @GetMapping("/serviceCenters")
-    public List<Servicecenter> getAllServiceCenters() {
-        return serviceCenterService.getAllServiceCenters();
+
+    @GetMapping("/carservices")
+    public List<CarService> getAllcarservices() {
+        return getAllcarservices();
     }
 
-    @PostMapping("/serviceCenters/register")
-    public Servicecenter createServiceCenter(@RequestBody Servicecenter servicecenter){
-        return serviceCenterService.createServiceCenter(servicecenter);
+    @PostMapping("/carservices/register")
+    public CarService createCarService(@RequestBody CarService CarService){
+        return CarServiceService.createCarService(CarService);
     }
 
+    @GetMapping("/carservices/{id}")
+    public CarService getcarserviceByid(@PathVariable long id){
+        return CarServiceService.getCarService(id);
 
-    @GetMapping("/serviceCenters/{phoneNumber}")
-    public Servicecenter getServiceCenterById(@PathVariable long phoneNumber){
-        return serviceCenterService.getServiceCenter(phoneNumber);
     }
 }

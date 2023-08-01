@@ -29,7 +29,7 @@ public class CarServiceService implements CarServiceServiceI {
     }
 
     @Override
-    public CarService create(CarService carService) {
+    public CarService createCarService(CarService carService) {
 
 
         InspectionDetails inspectionDetails = carService.getInspectionDetails();

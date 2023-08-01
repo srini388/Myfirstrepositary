@@ -28,6 +28,10 @@ public class CarService {
     @JoinColumn(name="inspectionDetails_id")
     private InspectionDetails inspectionDetails;
 
+    @ElementCollection
+    @MapKeyColumn(name = "string_col")
+    @Column(name = "boolean_col")
     private Map<String,Boolean> services;
+    @ElementCollection
     private List<String> serviceNotes;
 }
