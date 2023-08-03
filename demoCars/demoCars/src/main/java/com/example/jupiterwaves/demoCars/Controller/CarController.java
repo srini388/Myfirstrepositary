@@ -1,32 +1,42 @@
 package com.example.jupiterwaves.demoCars.Controller;
 
 import com.example.jupiterwaves.demoCars.model.Car;
-import com.example.jupiterwaves.demoCars.model.CarService;
+import com.example.jupiterwaves.demoCars.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/v1")
-
+@RequestMapping("/cars")
 public class CarController {
+
+    private final CarService carService;
+
     @Autowired
-    private Car car;
-
-    @GetMapping("/car")
-    public List<CarService> getAllcar() {
-        return getAllcar();
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
 
-    @PostMapping("/car/register")
-    public Car createCar(@RequestBody Car Car){
-        return Car.createcar(Car);
+    @GetMapping("/{carId}")
+    public ResponseEntity<Car> getCarById(@PathVariable long carId) {
+        Car car = carService.getCarById(carId);
+        return new ResponseEntity<>(car, HttpStatus.OK);
     }
 
-    @GetMapping("/car/{id}")
-    public Car getcarByid(@PathVariable long id){
-        return Car.getBy(id);
 
+
+    @PostMapping
+    public ResponseEntity<Car> saveCar(@RequestBody Car car) {
+        Car savedCar = carService.saveCar(car);
+        return new ResponseEntity<>(savedCar, HttpStatus.CREATED);
+    }
+
+
+
+    @DeleteMapping("/{carId}")
+    public ResponseEntity<Void> deleteCarById(@PathVariable long carId) {
+        carService.deleteCarById(carId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

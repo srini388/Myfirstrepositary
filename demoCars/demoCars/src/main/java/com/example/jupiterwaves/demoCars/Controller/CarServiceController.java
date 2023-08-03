@@ -16,17 +16,17 @@ public class CarServiceController {
     private CarServiceServiceI CarServiceService;
 
 
-    @GetMapping("/carservices")
+    @GetMapping("/services")
     public List<CarService> getAllcarservices() {
         return getAllcarservices();
     }
 
-    @PostMapping("/carservices/register")
+    @PostMapping("/services/register")
     public CarService createCarService(@RequestBody CarService CarService){
         return CarServiceService.createCarService(CarService);
     }
 
-    @GetMapping("/carservices/{id}")
+    @GetMapping("/services/{id}")
     public CarService getcarserviceByid(@PathVariable long id){
         return CarServiceService.getCarService(id);
 
